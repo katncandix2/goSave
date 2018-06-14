@@ -18,3 +18,11 @@ beta版所实现功能
 6.TestUnit     测试用例统一放置于此
 7.WebServer    路由、http处理接口放置于此 beta 暂时监听特定端口后期手动实现dispathcher
 ```
+```
+git 分支命名
+[todo]/[name]/[mode]
+
+例如
+feature/guruiqin/addHttpServer
+fix/guruiqin/fixXXX
+```
