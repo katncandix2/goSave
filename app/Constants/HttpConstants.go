@@ -6,5 +6,12 @@
 */
 package Constants
 
-const SUCCESS  = 200
-const CLIENT_ERROR  = 403
+const (
+	SUCCESS  = 200
+	CLIENT_ERROR  = 403
+)
+
+const (
+	HTTP  = "http://"
+	HTTPS = "https://"
+)
