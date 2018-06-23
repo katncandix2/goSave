@@ -12,10 +12,10 @@ import (
 )
 
 func IndexHandler(res http.ResponseWriter, req *http.Request) {
-	fmt.Println("----------------------------")
-	fmt.Println(req)
-	fmt.Println(req.FormValue("name"))
-	fmt.Fprintln(res, "hello world")
+
+	userName := req.FormValue("name")
+
+	fmt.Fprintln(res, "hello world"+userName)
 }
 
 func main() {

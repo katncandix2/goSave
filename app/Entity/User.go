@@ -9,4 +9,14 @@ package Entity
 type User struct {
 	name string
 	age  int
+
+	value *superMan
 }
+
+type superMan interface {
+	fly()
+	jump()
+	sayHello()
+}
+
+

@@ -15,6 +15,7 @@ import (
 	"unsafe"
 	"encoding/json"
 	"bytes"
+	"strings"
 )
 
 func HttpGet(url string,params string)string  {
@@ -40,7 +41,7 @@ func HttpGet(url string,params string)string  {
 	return string(body)
 }
 
-func HttpPost(params map[string]interface{},url string)string  {
+func HttpPostJson(params map[string]interface{},url string)string  {
 
 	bytesData, err := json.Marshal(params)
 
@@ -59,6 +60,41 @@ func HttpPost(params map[string]interface{},url string)string  {
 
 	request.Header.Set("Content-Type", "application/json;charset=UTF-8")
 
+	client := http.Client{}
+
+	resp, err := client.Do(request)
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return ""
+	}
+
+	respBytes, err := ioutil.ReadAll(resp.Body)
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return ""
+	}
+
+	//byte数组直接转成string，优化内存
+	str := (*string)(unsafe.Pointer(&respBytes))
+	return *str
+}
+
+func HttpPost(params string,url string) string  {
+
+	reader := strings.NewReader(params)
+
+	request, err := http.NewRequest("POST", url, reader)
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return ""
+	}
+
+	//request.Header.Set("Content-Type", "application/json;charset=UTF-8")
+
+	request.Header.Set("Content-Type","application/x-www-form-urlencoded")
 	client := http.Client{}
 
 	resp, err := client.Do(request)

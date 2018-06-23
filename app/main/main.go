@@ -8,17 +8,22 @@ package main
 
 import (
 	"goSave/app/Utils"
+	"goSave/app/Constants"
+	"encoding/json"
 	"fmt"
 )
 
+
 func main()  {
 
+	str :="stuIdArr[]=8336677"
 
-	song := make(map[string]interface{})
-	song["name"] = "李白"
-	song["timelength"] = 128
-	song["author"] = "李荣浩"
+	res := Utils.HttpPost(str,Constants.USER_ORDER_BY_USERID_ARR)
 
-	res := Utils.HttpPost(song,"http://localhost:8080/hello")
-	fmt.Println(res)
+	var data interface{}
+
+	json.Unmarshal([]byte(res),&data)
+
+	fmt.Println(data)
+
 	}
